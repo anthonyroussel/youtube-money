@@ -1,0 +1,90 @@
+swagger: "2.0"
+info:
+  description: "This is a sample web service. You can use the user interface or directly by url to get access to several information about your favorite youtuber !"
+  version: "1.0.0"
+  title: "Youtuber facts !"
+  contact:
+    email: "youtuberfact.staff@student.lut.fi"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "soa-anthonyroussel.c9users.io"
+tags:
+- name: "youtuber fact"
+  description: "Everything about your youtuber"
+ 
+schemes:
+- "https"
+paths:
+  /channel?name={name}:
+    get:
+      tags:
+      - "youtuber fact"
+      summary: "get statistic information about your favorite youtuber"
+      description: "you can access to number of view, the creation date, the number of subscriber, the number of subscriber per month, the video per month, the number of video and of course the most important part : the youtube money he made"
+      operationId: "addPet"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "name of the channel"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/Channelinformation"
+        404:
+          description: "Invalid input"
+          schema:
+            $ref: "#/definitions/InvalidInput"
+
+definitions:
+  Channelinformation:
+    type: object
+    properties:
+      id:
+        type: string
+        format: id
+        example: UCSQJvE1mDqIFtGUVBfJ0y1Q
+      title:
+        type: string
+        example: Codingtech
+      thumbnail:
+        type: string
+        format: url
+        example: "https:\/\/yt3.ggpht.com\/-J7Tp0Nkyqlw\/AAAAAAAAAAI\/AAAAAAAAAAA\/ss3YKeInU_M\/s88-c-k-no-mo-rj-c0xffffff\/photo.jpg"
+      publishedAt:
+        example: 2016-08-29T09:12:33.001Z
+      statistic:
+        $ref: '#/definitions/Statistic'
+  Statistic:
+    properties:
+      viewCount:
+        type: integer
+        example: "1000000"
+      subscriberCount:
+        type: integer
+        example: "100"
+      videoPerMonth:
+        type: integer
+        example: "100"
+      money: 
+        type: integer
+        example: "100"
+      videoCount: 
+        type: integer
+        example: "100"
+  InvalidInput:
+    properties:
+      code:
+        type: integer
+        example: 404
+      msg:
+        type: string
+        example: "Could not find any channel with this name"
