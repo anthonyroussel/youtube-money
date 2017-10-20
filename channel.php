@@ -5,7 +5,7 @@ header("Content-type: application/json");
 // please put below your youtube data api key
 // see https://console.developers.google.com/apis/credentials
 //
-$youtube_api_key = "AIzaSyCTk_JlblxJuEnstg5TwE4KllppM6H_0fs";
+$youtube_api_key = "INSERT_API_KEY_HERE";
 
 // check for the channel name in the request body
 //
